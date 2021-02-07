@@ -22,10 +22,11 @@ public class Main extends Application {
 	public int scale = 3; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-		mapNodes = ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv", ReadCSV.MapNode.class);
-		mapEdges = ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv", ReadCSV.MapEdge.class);
-		System.out.println(mapNodes);
-		System.out.println(mapEdges);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), Map.Element.Node);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/testmapEdges.csv"), Map.Element.Edge);
+
+    System.out.println(Map.nodes);
+    System.out.println(Map.edges);
 		//creating the image object
 		InputStream stream = new FileInputStream("src/FaulknerFloor1.png");
 		Image image = new Image(stream);

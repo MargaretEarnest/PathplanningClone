@@ -19,6 +19,8 @@ public class Main extends Application {
 	static ArrayList<ReadCSV.MapNode> mapNodes = new ArrayList<>();
 	static ArrayList<ReadCSV.MapEdge> mapEdges = new ArrayList<>();
 
+	public int scale = 3; // scales image to 1/scale
+
 	public void start(Stage stage) throws IOException {
 		mapNodes = ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv", ReadCSV.MapNode.class);
 		mapEdges = ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv", ReadCSV.MapEdge.class);
@@ -34,12 +36,12 @@ public class Main extends Application {
 		//Setting the image view parameters
 		imageView.setX(0);
 		imageView.setY(0);
-		imageView.setFitWidth(image.getWidth() / 2);
+		imageView.setFitWidth(image.getWidth() / scale);
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group(imageView);
-		root = ImageInteraction.drawNodesOnImage(mapNodes, mapEdges, root);
-		Scene scene = new Scene(root, image.getWidth() / 2, image.getHeight() / 2);
+		root = ImageInteraction.drawNodesOnImage(mapNodes, mapEdges, root, scale);
+		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);
 		stage.show();

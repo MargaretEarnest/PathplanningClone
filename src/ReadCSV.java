@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ReadCSV {
 
-	static <T> List<T> readFromFile(String path, Class<T> element) {
-		List<T> returnList = new ArrayList<T>();
+	static <T> ArrayList<T> readFromFile(String path, Class<T> element) {
+		ArrayList<T> returnList = new ArrayList<T>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			String line;
@@ -35,12 +35,12 @@ public class ReadCSV {
 
 	static class MapNode {
 		protected final String id, building, nodeType, longname, shortname, teamassigned;
-		protected final int xcoord, yfloor, floor;
+		protected final int xcoord, ycoord, floor;
 
 		private MapNode(List<String> nodeInit) {
 			this.id = nodeInit.get(0);
 			this.xcoord = Integer.parseInt(nodeInit.get(1));
-			this.yfloor = Integer.parseInt(nodeInit.get(2));
+			this.ycoord = Integer.parseInt(nodeInit.get(2));
 			this.floor = Integer.parseInt(nodeInit.get(3));
 			this.building = nodeInit.get(4);
 			this.nodeType = nodeInit.get(5);
@@ -59,7 +59,7 @@ public class ReadCSV {
 					", shortname='" + shortname + '\'' +
 					", teamassigned='" + teamassigned + '\'' +
 					", xcoord=" + xcoord +
-					", yfloor=" + yfloor +
+					", yfloor=" + ycoord +
 					", floor=" + floor +
 					'}';
 		}

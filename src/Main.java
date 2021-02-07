@@ -16,8 +16,8 @@ import java.util.List;
 
 public class Main extends Application {
 	// Lists that hold arrays of map nodes and edges based on csv input
-	static List<ReadCSV.MapNode> mapNodes = new ArrayList<>();
-	static List<ReadCSV.MapEdge> mapEdges = new ArrayList<>();
+	static ArrayList<ReadCSV.MapNode> mapNodes = new ArrayList<>();
+	static ArrayList<ReadCSV.MapEdge> mapEdges = new ArrayList<>();
 
 	public void start(Stage stage) throws IOException {
 		mapNodes = ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv", ReadCSV.MapNode.class);
@@ -38,38 +38,11 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group(imageView);
-		Line line = LineBuilder.create()
-				.startX(0)
-				.startY(0)
-				.endX(50)
-				.endY(50)
-				.stroke(Color.RED)
-				.strokeWidth(7)
-				.build();
-
-		root.getChildren().add(line);
+		root = ImageInteraction.drawNodesOnImage(mapNodes, mapEdges, root);
 		Scene scene = new Scene(root, image.getWidth() / 2, image.getHeight() / 2);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	ReadCSV.MapNode getNode(String id) {
-		for(ReadCSV.MapNode node : mapNodes) {
-			if(node.id.equals(id)) {
-				return node;
-			}
-		}
-		return null;
-	}
-
-	ReadCSV.MapEdge getEdge(String id) {
-		for(ReadCSV.MapEdge node : mapEdges) {
-			if(node.id.equals(id)) {
-				return node;
-			}
-		}
-		return null;
 	}
 
 	public static void main(String args[]) {

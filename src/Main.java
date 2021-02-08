@@ -14,9 +14,13 @@ public class Main extends Application {
 	public int scale = 3; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-    HospitalMap.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
+		//MapPFaulkner1Nodes.csv
+		HospitalMap map = new HospitalMap();
+    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
+		System.out.println(DepthFirstSearch.performSearch(HospitalMap.nodesHash.get("N01"), HospitalMap.nodesHash.get("N13"), map));
 
-    System.out.println(HospitalMap.nodes);
+		//System.out.println(HospitalMap.nodes);
+
 		//creating the image object
 		InputStream stream = new FileInputStream("src/FaulknerFloor1.png");
 		Image image = new Image(stream);

@@ -1,34 +1,35 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
+import Graph.Graph;
+import Graph.GraphNode;
 
-public class HospitalMap {
+import java.util.*;
+
+public class HospitalMap extends Graph<HospitalMap.Node> {
     // Lists that hold arrays of map nodes and edges based on csv input
-    static ArrayList<Node> nodes = new ArrayList<>();
-    static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
+    //static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
 
-    public enum Element { Node, Edge }
+    public HospitalMap(){
+        nodes = new HashSet<>();
+    }
 
-    public static void generateElementFromData(List<List<String>> nodesList, List<List<String>> edgesList){
+    public void generateElementFromData(List<List<String>> nodesList, List<List<String>> edgesList){
         for (List<String> values:nodesList) {
             Node currNode = new Node(values);
             nodes.add(currNode);
-            nodesHash.put(currNode.id, currNode);
         }
 
         //iterates through edges and connects respective nodes
         for (List<String> values:edgesList) {
             Edge currEdge = new Edge(values);
-            Node a = nodesHash.get(currEdge.startNode);
-            Node b = nodesHash.get(currEdge.endNode);
+            Node a = getNode(currEdge.startNode);
+            Node b = getNode(currEdge.endNode);
             a.connectedNodes.add(b);
             b.connectedNodes.add(a);
         }
     }
 
-    public static class Node {
+    public static class Node implements GraphNode {
         public final String id, building, nodeType, longname, shortname, teamassigned;
-        public ArrayList<Node> connectedNodes = new ArrayList<>();
+        public Set<Node> connectedNodes = new HashSet<>();
         public final int xcoord, ycoord, floor;
 
         private Node(List nodeInit) {
@@ -41,6 +42,14 @@ public class HospitalMap {
             this.longname = (String) nodeInit.get(6);
             this.shortname = (String) nodeInit.get(7);
             this.teamassigned = (String) nodeInit.get(8);
+        }
+
+        public String getID(){
+            return this.id;
+        }
+
+        public Set<Node> getConnections(){
+            return this.connectedNodes;
         }
 
         @Override

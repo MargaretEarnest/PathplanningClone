@@ -38,7 +38,7 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group();
-		ImageHandler hander = new ImageHandler(HospitalMap.nodes, imageView, scale, root);
+		ImageHandler hander = new ImageHandler(map.nodes, imageView, scale, root);
 		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);

@@ -20,7 +20,7 @@ public class ImageHandler {
 	private ImageView baseImage;
 	private HashMap<HospitalMap.Node, Circle> nodes = new HashMap<>();
 
-	public ImageHandler(ArrayList<HospitalMap.Node> mapNodes, ImageView baseImage, int scale, Group root) {
+	public ImageHandler(Set<HospitalMap.Node> mapNodes, ImageView baseImage, int scale, Group root) {
 		this.root = root;
 		this.baseImage = baseImage;
 		this.scale = scale;

@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class HospitalMap {
     // Lists that hold arrays of map nodes and edges based on csv input
     static ArrayList<Node> nodes = new ArrayList<>();
-    //static ArrayList<Edge> edges = new ArrayList<>(); //potentially not needed as a global variable here
     static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
 
     public enum Element { Node, Edge }

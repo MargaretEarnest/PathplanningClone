@@ -18,18 +18,18 @@ public class ImageHandler {
 	private Group root;
 	private int scale;
 	private ImageView baseImage;
-	private HashMap<ReadCSV.MapNode, Circle> nodes = new HashMap<>();
-	private ArrayList<ReadCSV.MapEdge> edges;
+	private HashMap<Map.Node, Circle> nodes = new HashMap<>();
+	private ArrayList<Map.Edge> edges;
 
-	public ImageHandler(ArrayList<ReadCSV.MapNode> mapNodes, ArrayList<ReadCSV.MapEdge> mapEdges, ImageView baseImage, int scale, Group root) {
+	public ImageHandler(ArrayList<Map.Node> mapNodes, ImageView baseImage, int scale, Group root) {
 		this.root = root;
-		this.edges = mapEdges;
+//		this.edges = mapEdges;
 		this.baseImage = baseImage;
 		this.scale = scale;
 		root.getChildren().add(baseImage);
-		for(ReadCSV.MapNode node : mapNodes) {
+		for(Map.Node node : mapNodes) {
 			Circle circle = new Circle(node.xcoord / scale, node.ycoord / scale, 13 / scale);
-			circle.setFill(node.color);
+			circle.setFill(Color.RED);
 			circle.setOnMousePressed(e -> {
 				if (e.getButton() == MouseButton.SECONDARY) {
 					root.getChildren().remove(nodes.get(node));
@@ -50,24 +50,24 @@ public class ImageHandler {
 			});
 			this.nodes.put(node, circle);
 		}
-		ArrayList<ReadCSV.MapEdge> modifiedEdges = new ArrayList<>(edges);
-		for (ReadCSV.MapEdge edge : this.edges) {
-			ReadCSV.MapNode start = getNode(nodes.keySet(), edge.startNode);
-			ReadCSV.MapNode end = getNode(nodes.keySet(), edge.endNode);
-			System.out.println(start + " " + end);
-			if(start != null && end != null) {
-				Line line = LineBuilder.create()
-						.startX(start.xcoord / scale)
-						.startY(start.ycoord / scale)
-						.endX(end.xcoord / scale)
-						.endY(end.ycoord / scale)
-						.stroke(Color.RED)
-						.strokeWidth(14 / scale)
-						.build();
-				root.getChildren().add(line);
-			}
-			edges = modifiedEdges;
-		}
+//		ArrayList<ReadCSV.MapEdge> modifiedEdges = new ArrayList<>(edges);
+//		for (ReadCSV.MapEdge edge : this.edges) {
+//			ReadCSV.MapNode start = getNode(nodes.keySet(), edge.startNode);
+//			ReadCSV.MapNode end = getNode(nodes.keySet(), edge.endNode);
+//			System.out.println(start + " " + end);
+//			if(start != null && end != null) {
+//				Line line = LineBuilder.create()
+//						.startX(start.xcoord / scale)
+//						.startY(start.ycoord / scale)
+//						.endX(end.xcoord / scale)
+//						.endY(end.ycoord / scale)
+//						.stroke(Color.RED)
+//						.strokeWidth(14 / scale)
+//						.build();
+//				root.getChildren().add(line);
+//			}
+//			edges = modifiedEdges;
+//		}
 		root.getChildren().addAll(nodes.values());
 	}
 

@@ -34,7 +34,7 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group();
-		ImageHandler hander = new ImageHandler(mapNodes, mapEdges, imageView, scale, root);
+		ImageHandler hander = new ImageHandler(Map.nodes, imageView, scale, root);
 		root = hander.drawNodesOnImage();
 		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");

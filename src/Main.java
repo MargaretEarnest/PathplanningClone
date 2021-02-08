@@ -1,7 +1,6 @@
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -9,7 +8,6 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 
 public class Main extends Application {
@@ -19,8 +17,10 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		//MapPFaulkner1Nodes.csv
 		HospitalMap map = new HospitalMap();
-    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
-		System.out.println(DepthFirstSearch.performSearch(HospitalMap.nodesHash.get("N01"), HospitalMap.nodesHash.get("N13"), map));
+//    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
+		map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
+
+//		System.out.println(DepthFirstSearch.performSearch(HospitalMap.nodesHash.get("N01"), HospitalMap.nodesHash.get("N13"), map));
 
 		//System.out.println(HospitalMap.nodes);
 
@@ -38,8 +38,7 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group();
-		ImageHandler hander = new ImageHandler(Map.nodes, imageView, scale, root);
-		root = hander.drawNodesOnImage();
+		ImageHandler hander = new ImageHandler(HospitalMap.nodes, imageView, scale, root);
 		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);

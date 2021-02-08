@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class ReadCSV {
 	static class MapNode {
 		protected final String id, building, nodeType, longname, shortname, teamassigned;
 		protected final int xcoord, ycoord, floor;
+		protected Color color;
 
 		private MapNode(List<String> nodeInit) {
 			this.id = nodeInit.get(0);
@@ -47,6 +50,24 @@ public class ReadCSV {
 			this.longname = nodeInit.get(6);
 			this.shortname = nodeInit.get(7);
 			this.teamassigned = nodeInit.get(8);
+			this.color = Color.RED;
+		}
+
+		private MapNode(String id, String building, String nodeType, String longname, String shortname, String teamassigned, int xcoord, int ycoord, int floor, Color color) {
+			this.id = id;
+			this.building = building;
+			this.nodeType = nodeType;
+			this.longname = longname;
+			this.shortname = shortname;
+			this.teamassigned = teamassigned;
+			this.xcoord = xcoord;
+			this.ycoord = ycoord;
+			this.floor = floor;
+			this.color = color;
+		}
+
+		public MapNode clone() {
+			return new MapNode(id, building, nodeType, longname, shortname, teamassigned, xcoord, ycoord, floor, color);
 		}
 
 		@Override
@@ -62,6 +83,10 @@ public class ReadCSV {
 					", yfloor=" + ycoord +
 					", floor=" + floor +
 					'}';
+		}
+
+		public void setColor(Color newColor) {
+			this.color = newColor;
 		}
 	}
 

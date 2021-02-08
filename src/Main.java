@@ -15,15 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
-	// Lists that hold arrays of map nodes and edges based on csv input
-	static ArrayList<ReadCSV.MapNode> mapNodes = new ArrayList<>();
-	static ArrayList<ReadCSV.MapEdge> mapEdges = new ArrayList<>();
 
 	public int scale = 3; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-    Map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), Map.Element.Node);
-    Map.generateElementFromData(ReadCSV.readFromFile("src/testmapEdges.csv"), Map.Element.Edge);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), Map.Element.Node);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"), Map.Element.Edge);
 
     System.out.println(Map.nodes);
     System.out.println(Map.edges);
@@ -41,7 +38,7 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group(imageView);
-		root = ImageInteraction.drawNodesOnImage(mapNodes, mapEdges, root, scale);
+		root = ImageInteraction.drawNodesOnImage(Map.nodes, Map.edges, root, scale);
 		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);

@@ -11,17 +11,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Main extends Application {
-	// Lists that hold arrays of map nodes and edges based on csv input
-	ArrayList<ReadCSV.MapNode> mapNodes = new ArrayList<>();
-	ArrayList<ReadCSV.MapEdge> mapEdges = new ArrayList<>();
 
 	public int scale = 2; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-		mapNodes = ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv", ReadCSV.MapNode.class);
-		mapEdges = ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv", ReadCSV.MapEdge.class);
-		System.out.println(mapNodes);
-		System.out.println(mapEdges);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), Map.Element.Node);
+    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"), Map.Element.Edge);
+
+    System.out.println(Map.nodes);
+    System.out.println(Map.edges);
 		//creating the image object
 		InputStream stream = new FileInputStream("src/FaulknerFloor1.png");
 		Image image = new Image(stream);

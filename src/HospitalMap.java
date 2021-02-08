@@ -1,24 +1,35 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
-public class Map {
+public class HospitalMap {
     // Lists that hold arrays of map nodes and edges based on csv input
     static ArrayList<Node> nodes = new ArrayList<>();
-    static ArrayList<Edge> edges = new ArrayList<>();
+    //static ArrayList<Edge> edges = new ArrayList<>(); //potentially not needed as a global variable here
+    static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
 
     public enum Element { Node, Edge }
 
-    public static void generateElementFromData(List<List<String>> data, Element element){
-        for (List<String> values:data) {
-            if (element == Element.Node)
-                nodes.add(new Node(values));
-            else
-                edges.add(new Edge(values));
+    public static void generateElementFromData(List<List<String>> nodesList, List<List<String>> edgesList){
+        for (List<String> values:nodesList) {
+            Node currNode = new Node(values);
+            nodes.add(currNode);
+            nodesHash.put(currNode.id, currNode);
+        }
+
+        //iterates through edges and connects respective nodes
+        for (List<String> values:edgesList) {
+            Edge currEdge = new Edge(values);
+            Node a = nodesHash.get(currEdge.startNode);
+            Node b = nodesHash.get(currEdge.endNode);
+            a.connectedNodes.add(b);
+            b.connectedNodes.add(a);
         }
     }
 
     public static class Node {
         public final String id, building, nodeType, longname, shortname, teamassigned;
+        public ArrayList<Node> connectedNodes = new ArrayList<>();
         public final int xcoord, ycoord, floor;
 
         private Node(List nodeInit) {

@@ -4,22 +4,26 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+
 public class Main extends Application {
 
 	public int scale = 2; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), Map.Element.Node);
-    Map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"), Map.Element.Edge);
+		//MapPFaulkner1Nodes.csv
+		HospitalMap map = new HospitalMap();
+    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
+		System.out.println(DepthFirstSearch.performSearch(HospitalMap.nodesHash.get("N01"), HospitalMap.nodesHash.get("N13"), map));
 
-    System.out.println(Map.nodes);
-    System.out.println(Map.edges);
+		//System.out.println(HospitalMap.nodes);
+
 		//creating the image object
 		InputStream stream = new FileInputStream("src/FaulknerFloor1.png");
 		Image image = new Image(stream);

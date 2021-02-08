@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ImageInteraction {
 
-	public static Group drawNodesOnImage(ArrayList<ReadCSV.MapNode> nodes, ArrayList<ReadCSV.MapEdge> edges, Group root, int scale) {
-		for (ReadCSV.MapEdge edge : edges) {
-			ReadCSV.MapNode start = getNode(nodes, edge.startNode);
-			ReadCSV.MapNode end = getNode(nodes, edge.endNode);
+	public static Group drawNodesOnImage(ArrayList<Map.Node> nodes, ArrayList<Map.Edge> edges, Group root, int scale) {
+		for (Map.Edge edge : edges) {
+			Map.Node start = getNode(nodes, edge.startNode);
+			Map.Node end = getNode(nodes, edge.endNode);
 			Line line = LineBuilder.create()
 					.startX(start.xcoord / scale)
 					.startY(start.ycoord / scale)
@@ -25,8 +25,8 @@ public class ImageInteraction {
 		return root;
 	}
 
-	static ReadCSV.MapNode getNode(List<ReadCSV.MapNode> mapNodes, String id) {
-		for (ReadCSV.MapNode node : mapNodes) {
+	static Map.Node getNode(List<Map.Node> mapNodes, String id) {
+		for (Map.Node node : mapNodes) {
 			if (node.id.equals(id)) {
 				return node;
 			}
@@ -34,8 +34,8 @@ public class ImageInteraction {
 		return null;
 	}
 
-	ReadCSV.MapEdge getEdge(List<ReadCSV.MapEdge> mapEdges, String id) {
-		for (ReadCSV.MapEdge node : mapEdges) {
+	Map.Edge getEdge(List<Map.Edge> mapEdges, String id) {
+		for (Map.Edge node : mapEdges) {
 			if (node.id.equals(id)) {
 				return node;
 			}

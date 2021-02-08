@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
-public class HospitalMap {
+public class HospitalMap{
     // Lists that hold arrays of map nodes and edges based on csv input
     static ArrayList<Node> nodes = new ArrayList<>();
     //static ArrayList<Edge> edges = new ArrayList<>(); //potentially not needed as a global variable here
     static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
+    protected List<Node> node;
 
     public enum Element { Node, Edge }
 
@@ -79,4 +80,39 @@ public class HospitalMap {
         }
     }
 
+
+
+    /**
+     *  nodeToCSV converts list of HospitalMap Nodes into a CSV file
+     * @param
+     * @param nodes
+     * @return nodeCSV
+     */
+    public static StringBuilder nodeToCSV(List<Node> nodes)
+    {
+       StringBuilder nodeCSV = new StringBuilder();
+       for (int i = 0; i < nodes.size();i++)
+       {
+         nodeCSV = nodeCSV.append(nodes.get(i));
+           System.out.println(nodeCSV + " , ");
+    }
+       return nodeCSV;
+    }
+
+    /**
+     *  edgeToCSV converts list of HospitalMap nodes into a CSV file
+     * @param edges
+     * @return edgeCSV
+     */
+    public StringBuilder edgeToCSV(List<Edge>edges)
+    {
+        StringBuilder edgeCSV = new StringBuilder();
+        for (int i = 0; i < edges.size();i++)
+        {
+            edgeCSV = edgeCSV.append(edges.get(i) + " , ");
+            System.out.println(edgeCSV);
+        }
+        return edgeCSV;
+
+    }
 }

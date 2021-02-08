@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ImageInteraction {
 
-	public static Group drawNodesOnImage(ArrayList<Map.Node> nodes, ArrayList<Map.Edge> edges, Group root, int scale) {
-		for (Map.Edge edge : edges) {
-			Map.Node start = getNode(nodes, edge.startNode);
-			Map.Node end = getNode(nodes, edge.endNode);
+	public static Group drawNodesOnImage(ArrayList<HospitalMap.Node> nodes, ArrayList<HospitalMap.Edge> edges, Group root, int scale) {
+		for (HospitalMap.Edge edge : edges) {
+			HospitalMap.Node start = getNode(nodes, edge.startNode);
+			HospitalMap.Node end = getNode(nodes, edge.endNode);
 			Line line = LineBuilder.create()
 					.startX(start.xcoord / scale)
 					.startY(start.ycoord / scale)
@@ -25,8 +25,8 @@ public class ImageInteraction {
 		return root;
 	}
 
-	static Map.Node getNode(List<Map.Node> mapNodes, String id) {
-		for (Map.Node node : mapNodes) {
+	static HospitalMap.Node getNode(List<HospitalMap.Node> mapNodes, String id) {
+		for (HospitalMap.Node node : mapNodes) {
 			if (node.id.equals(id)) {
 				return node;
 			}
@@ -34,8 +34,8 @@ public class ImageInteraction {
 		return null;
 	}
 
-	Map.Edge getEdge(List<Map.Edge> mapEdges, String id) {
-		for (Map.Edge node : mapEdges) {
+	HospitalMap.Edge getEdge(List<HospitalMap.Edge> mapEdges, String id) {
+		for (HospitalMap.Edge node : mapEdges) {
 			if (node.id.equals(id)) {
 				return node;
 			}

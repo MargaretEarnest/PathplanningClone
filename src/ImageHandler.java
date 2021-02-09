@@ -67,4 +67,21 @@ public class ImageHandler {
 				root.getChildren().add(line);
 		}
 	}
+
+	public <T extends Graph.GraphNode> void drawPath(List<T> path){
+
+		for (int i = 0; i < path.size() -1; i++){
+			T currNode = path.get(i);
+			T nextNode = path.get(i + 1);
+			Line line = LineBuilder.create()
+					.startX(currNode.getXcoord() / scale)
+					.startY(currNode.getYcoord() / scale)
+					.endX(nextNode.getXcoord() / scale)
+					.endY(nextNode.getYcoord() / scale)
+					.stroke(Color.BLUE)
+					.strokeWidth(14 / scale)
+					.build();
+			root.getChildren().add(line);
+		}
+	}
 }

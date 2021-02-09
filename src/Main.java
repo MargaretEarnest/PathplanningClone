@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 
 public class Main extends Application {
@@ -15,12 +16,13 @@ public class Main extends Application {
 	public int scale = 2; // scales image to 1/scale
 
 	public void start(Stage stage) throws IOException {
-		//MapPFaulkner1Nodes.csv
+		//Mini Map:   MapPFaulkner1Nodes.csv
 		HospitalMap map = new HospitalMap();
-    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
-		//map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
+    	map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
 
-		System.out.println(PathPlanning.A_star.performSearch(map.getNode("N01"), map.getNode("N13"), map));
+    	//Mini Map Test:  N01 -> N13
+		List<HospitalMap.Node> path = PathPlanning.A_star.performSearch(map.getNode("PKIOS00101"), map.getNode("PDEPT01001"), map);
+		System.out.println(path);
 
 		//System.out.println(HospitalMap.nodes);
 
@@ -38,7 +40,8 @@ public class Main extends Application {
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
 		Group root = new Group();
-		ImageHandler hander = new ImageHandler(map.nodes, imageView, scale, root);
+		ImageHandler handler = new ImageHandler(map.nodes, imageView, scale, root);
+		handler.drawPath(path);
 		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);

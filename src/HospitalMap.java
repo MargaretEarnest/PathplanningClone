@@ -79,4 +79,32 @@ public class HospitalMap {
         }
     }
 
+    public static Node getNode(String id){
+        for(Node n: nodes){
+            if(n.id.equals(id)){
+                return n;
+            }
+        }
+        return null;
+    }
+
+    public static void editNode(String id, Node newNode){
+        for(Node n: nodes){
+            if(n.id.equals(id)){
+                n = newNode;
+            }
+        }
+    }
+
+    public static Node removeNode(String id){
+        Node out = new Node(null);
+        for(Node n: nodes){
+            if(n.id.equals(id)){
+                out = n;
+                nodes.remove(n);
+            }
+        }
+        return out;
+    }
+
 }

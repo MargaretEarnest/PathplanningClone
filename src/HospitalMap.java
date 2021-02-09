@@ -114,7 +114,7 @@ public class HospitalMap {
         for (int i = 0; i < edges.size(); i++) {
 
             edgeCSV = edgeCSV.append(edges.get(i).startNode + " , " + edges.get(i).endNode + " , " + edges.get(i).id + " , " +  '\n');
-            System.out.println(edgeCSV);
+          //  System.out.println(edgeCSV);
 
 
         }

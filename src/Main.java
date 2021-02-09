@@ -46,7 +46,7 @@ public class Main extends Application {
 		stage.setScene(scene);
 		stage.show();
 
-		//System.out.println(HospitalMap.nodeToCSV(HospitalMap.nodes));
+		System.out.println(HospitalMap.nodeToCSV(HospitalMap.nodes));
 
 		System.out.println(HospitalMap.edgeToCSV(HospitalMap.edges));
 	}

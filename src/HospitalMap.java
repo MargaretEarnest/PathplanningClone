@@ -29,7 +29,7 @@ public class HospitalMap extends Graph<HospitalMap.Node> {
 
     public static class Node implements GraphNode {
         public final String id, building, nodeType, longname, shortname, teamassigned;
-        public Set<Node> connectedNodes = new HashSet<>();
+        public List<Node> connectedNodes = new ArrayList<>();
         public final int xcoord, ycoord, floor;
 
         private Node(List nodeInit) {
@@ -44,11 +44,19 @@ public class HospitalMap extends Graph<HospitalMap.Node> {
             this.teamassigned = (String) nodeInit.get(8);
         }
 
+        public int getXcoord() {
+            return xcoord;
+        }
+
+        public int getYcoord() {
+            return ycoord;
+        }
+
         public String getID(){
             return this.id;
         }
 
-        public Set<Node> getConnections(){
+        public List<Node> getConnections(){
             return this.connectedNodes;
         }
 

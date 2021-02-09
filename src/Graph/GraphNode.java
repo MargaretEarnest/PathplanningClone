@@ -1,9 +1,12 @@
 package Graph;
 
 import java.util.Set;
+import java.util.*;
 
 public interface GraphNode<T extends GraphNode<T>> {
     String getID();
+    int getXcoord();
+    int getYcoord();
 
-    Set<T> getConnections();
+    List<T> getConnections();
 }

@@ -29,7 +29,7 @@ public class PathNode<T extends Graph.GraphNode> implements Comparable<PathNode>
         if (other.priority == this.priority){
             return 0;
         }else if(other.priority < this.priority){
-            return 1;
+            return -1;
         }else{
             return 1;
         }

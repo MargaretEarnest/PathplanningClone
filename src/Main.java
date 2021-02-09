@@ -17,10 +17,10 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		//MapPFaulkner1Nodes.csv
 		HospitalMap map = new HospitalMap();
-//    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
-		map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
+    	map.generateElementFromData(ReadCSV.readFromFile("src/testmapNodes.csv"), ReadCSV.readFromFile("src/testmapEdges.csv"));
+		//map.generateElementFromData(ReadCSV.readFromFile("src/MapPFaulkner1Nodes.csv"), ReadCSV.readFromFile("src/MapPFaulkner1Edges.csv"));
 
-//		System.out.println(DepthFirstSearch.performSearch(HospitalMap.nodesHash.get("N01"), HospitalMap.nodesHash.get("N13"), map));
+		System.out.println(PathPlanning.A_star.performSearch(map.getNode("N01"), map.getNode("N13"), map));
 
 		//System.out.println(HospitalMap.nodes);
 

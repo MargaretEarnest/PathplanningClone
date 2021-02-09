@@ -62,6 +62,10 @@ public class HospitalMap extends Graph<HospitalMap.Node> {
 
         @Override
         public String toString() {
+            return "MapNode '" + id + '\'';
+        }
+
+        public String longToString() {
             return "MapNode{" +
                     "id='" + id + '\'' +
                     ", building='" + building + '\'' +

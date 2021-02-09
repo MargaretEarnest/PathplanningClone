@@ -8,7 +8,7 @@ import java.util.*;
 public class A_star {
     public static <T extends Graph.GraphNode> List<T> performSearch(T start, T end, Graph.Graph map){
 
-        PriorityQueue<PathNode> frontier = new PriorityQueue<>();
+        PriorityQueue<PathNode> frontier = new PriorityQueue<>(new NodeComparator());
         //all visited nodes-- stored in a Pathnode with the node, the last node visited, and the cost to it
         //access the pathnode by the ID of the current node
         HashMap<String,PathNode> visited = new HashMap<String,PathNode>();
@@ -25,7 +25,6 @@ public class A_star {
         while (!frontier.isEmpty()){
             current = frontier.poll();
             currentNode = (T)current.getNode();
-
             //if node found
             if (currentNode.equals(end)){
                // System.out.println("Found!");
@@ -36,12 +35,13 @@ public class A_star {
             for (T next:connectedNodes){
                 double newCost = current.getPriority() + computeDistance(currentNode, next);
                 if (!visited.containsKey(next.getID()) || newCost < visited.get(next.getID()).getPriority()){
-                    //System.out.println("Visiting node" + next.getID());
+                    //System.out.println("Visiting node" + next.getID()  + "   " + newCost);
                     //make the PathNode that stores where it came from & its cost; add it to visited nodes
                     PathNode<T> newPath = new PathNode<T>(next, currentNode, newCost);
                     visited.put(next.getID(), newPath);
 
                     priority = newCost + computeDistance(end, next);
+                    //System.out.println("priority: " + priority);
                     frontier.add(new PathNode<>(next, currentNode, priority));
                 }
             }
@@ -70,5 +70,19 @@ public class A_star {
         distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
         return distance;
+    }
+}
+
+class NodeComparator implements Comparator<PathNode>{
+
+    // Overriding compare()method of Comparator
+    public int compare(PathNode a, PathNode b){
+        if (a.getPriority() == b.getPriority()){
+            return 0;
+        }else if(a.getPriority() < b.getPriority()){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

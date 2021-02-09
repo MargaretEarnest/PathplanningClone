@@ -1,6 +1,6 @@
 package PathPlanning;
 
-public class PathNode<T extends Graph.GraphNode> implements Comparable<PathNode> {
+public class PathNode<T extends Graph.GraphNode> {
     private final T node;
     private T previous;
     private double priority;
@@ -23,15 +23,5 @@ public class PathNode<T extends Graph.GraphNode> implements Comparable<PathNode>
     }
     public double getPriority() {
         return priority;
-    }
-
-    public int compareTo(PathNode other){
-        if (other.priority == this.priority){
-            return 0;
-        }else if(other.priority < this.priority){
-            return -1;
-        }else{
-            return 1;
-        }
     }
 }

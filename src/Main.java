@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends Application {
@@ -43,9 +45,16 @@ public class Main extends Application {
 		stage.setTitle("Floor Map");
 		stage.setScene(scene);
 		stage.show();
+
+		System.out.println(HospitalMap.nodeToCSV(HospitalMap.nodes));
+
+		System.out.println(HospitalMap.edgeToCSV(HospitalMap.edges));
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[])
+	{
 		launch(args);
+
+
 	}
 }

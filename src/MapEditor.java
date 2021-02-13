@@ -1,9 +1,12 @@
-public class MapEditor {
+class MapEditor {
 	void addNode() {
 
 	}
-	void removeNode() {
+	void removeNode(HospitalMap.Node node) {
 
 	}
-	void edit
+	void editNode() {
+
+	}
+
 }

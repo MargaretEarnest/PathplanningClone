@@ -1,5 +1,12 @@
 Tasks:
     Move node:
+        - click and drag
+    Add node:
+        - right-click
+    Delete node:
+        - select and use button
+    Edit location node information:
+        - select and use inputs
     Delete node:
     Add node:
     Edit location information:

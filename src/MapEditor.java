@@ -1,3 +1,5 @@
+import ithorian.HospitalMap;
+
 class MapEditor {
 	void addNode() {
 

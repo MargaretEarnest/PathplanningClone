@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapManager {
 
@@ -61,5 +63,9 @@ public class MapManager {
 
 	public MapEditor getMapEditor() {
 		return mapEditor;
+	}
+
+	public ArrayList<HospitalMap.Node> getHospitalMapNodes() {
+		return HospitalMap.nodes;
 	}
 }

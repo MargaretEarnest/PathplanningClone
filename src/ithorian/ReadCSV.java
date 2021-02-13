@@ -1,3 +1,5 @@
+package ithorian;
+
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;

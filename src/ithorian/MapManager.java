@@ -66,7 +66,7 @@ public class MapManager {
 		return mapEditor;
 	}
 
-	public ArrayList<HospitalMap.Node> getHospitalMapNodes() {
+	public static ArrayList<HospitalMap.Node> getHospitalMapNodes() {
 		return HospitalMap.nodes;
 	}
 

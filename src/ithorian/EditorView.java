@@ -8,6 +8,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EditorView {
@@ -73,5 +74,9 @@ public class EditorView {
 			newCircle.setFill(Color.RED);
 		});
 		return circle;
+	}
+
+	public void updateReferencesToCurrNodes(){
+		ArrayList currHospitalMapNodes = MapManager.getHospitalMapNodes();
 	}
 }

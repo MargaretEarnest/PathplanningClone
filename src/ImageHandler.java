@@ -2,6 +2,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -30,15 +31,7 @@ public class ImageHandler {
 			Circle circle = new Circle(node.xcoord / scale, node.ycoord / scale, 13 / scale);
 			circle.setFill(Color.RED);
 			circle.setOnMousePressed(e -> {
-				if (e.getButton() == MouseButton.SECONDARY) {
-					root.getChildren().remove(nodes.get(node));
-					for(HospitalMap.Node neighbor : node.connectedNodes) {
-						neighbor.connectedNodes.remove(node);
-					}
-					nodes.remove(node);
-					root.getChildren().removeIf(element -> element.getClass() == Line.class);
-					for(HospitalMap.Node newNode : this.nodes.keySet()) { drawEdges(newNode);}
-				}
+				onRightClick(e, node);
 			});
 			circle.setOnMouseEntered(t -> {
 				Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
@@ -52,6 +45,18 @@ public class ImageHandler {
 			this.nodes.put(node, circle);
 		}
 		root.getChildren().addAll(nodes.values());
+	}
+
+	private void onRightClick(MouseEvent e, HospitalMap.Node node) {
+		if (e.getButton() == MouseButton.SECONDARY) {
+			root.getChildren().remove(nodes.get(node));
+			for(HospitalMap.Node neighbor : node.connectedNodes) {
+				neighbor.connectedNodes.remove(node);
+			}
+			nodes.remove(node);
+			root.getChildren().removeIf(element -> element.getClass() == Line.class);
+			for(HospitalMap.Node newNode : this.nodes.keySet()) { drawEdges(newNode);}
+		}
 	}
 
 	private void drawEdges(HospitalMap.Node parent) {

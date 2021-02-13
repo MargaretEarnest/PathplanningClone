@@ -1,5 +1,6 @@
+package ithorian;
+
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -8,25 +9,21 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineBuilder;
 
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 public class EditorView {
 
 	private Group root;
 	private int scale;
-	private ImageView baseImage;
-	private HashMap<HospitalMap.Node, Circle> nodes = new HashMap<>();
+	private HashMap<HospitalMap.Node, Circle> references = new HashMap<>();
+	private MapManager mapManager;
 
-	public EditorView(ArrayList<HospitalMap.Node> mapNodes, ImageView baseImage, int scale, Group root) {
-		this.root = root;
-		this.baseImage = baseImage;
+	public EditorView(MapManager mapManager, ImageView baseImage, int scale, Group root) {
+		this.mapManager = mapManager;
+		this.root = mapManager.getRoot();
 		this.scale = scale;
 		root.getChildren().add(baseImage);
-		for(HospitalMap.Node node : mapNodes) {
+		for(HospitalMap.Node node : HospitalMap.nodes) {
 			drawEdges(node);
 			Circle circle = new Circle(node.xcoord / scale, node.ycoord / scale, 13 / scale);
 			circle.setFill(Color.RED);
@@ -42,20 +39,22 @@ public class EditorView {
 				Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
 				newCircle.setFill(Color.RED);
 			});
-			this.nodes.put(node, circle);
+			this.references.put(node, circle);
 		}
-		root.getChildren().addAll(nodes.values());
+		root.getChildren().addAll(references.values());
+	}
+
+	public void update() {
+		//
 	}
 
 	private void onRightClick(MouseEvent e, HospitalMap.Node node) {
 		if (e.getButton() == MouseButton.SECONDARY) {
-			root.getChildren().remove(nodes.get(node));
-			for(HospitalMap.Node neighbor : node.connectedNodes) {
-				neighbor.connectedNodes.remove(node);
-			}
-			nodes.remove(node);
+			root.getChildren().remove(references.get(node));
+			references.remove(node);
+			mapManager.getMapEditor().removeNode(node);
 			root.getChildren().removeIf(element -> element.getClass() == Line.class);
-			for(HospitalMap.Node newNode : this.nodes.keySet()) { drawEdges(newNode);}
+			for(HospitalMap.Node newNode : this.references.keySet()) { drawEdges(newNode);}
 		}
 	}
 

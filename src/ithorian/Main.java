@@ -1,3 +1,5 @@
+package ithorian;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,13 +18,9 @@ public class Main extends Application {
 
 
 	public void start(Stage stage) throws IOException {
-
+		MapManager mapManager = new MapManager("src/ithorian/MapPFaulkner1Nodes.csv", "src/ithorian/MapPFaulkner1Edges.csv", "src/ithorian/FaulknerFloor1.png");
+		mapManager.init();
 	}
 
-	public static void main(String args[])
-	{
-		launch(args);
-
-
-	}
+	public static void main(String args[]) { launch(args); }
 }

@@ -1,3 +1,5 @@
+package ithorian;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -9,11 +11,9 @@ public class HospitalMap {
     static ArrayList<Edge> edges = new ArrayList<>(); //potentially not needed as a global variable here
     static HashMap<String, Node> nodesHash = new HashMap<String, Node>();
 
-
-
     public enum Element {Node, Edge}
 
-    public static void generateElementFromData(List<List<String>> nodesList, List<List<String>> edgesList) {
+    public void generateElementFromData(List<List<String>> nodesList, List<List<String>> edgesList) {
         for (List<String> values : nodesList) {
             Node currNode = new Node(values);
             nodes.add(currNode);

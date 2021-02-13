@@ -1,7 +1,6 @@
 package ithorian;
 
 import javafx.scene.Group;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -13,39 +12,25 @@ import java.util.HashMap;
 
 public class EditorView {
 
-	private Group root;
-	private int scale;
-	private HashMap<HospitalMap.Node, Circle> references = new HashMap<>();
-	private MapManager mapManager;
+	private final Group root;
+	private final int scale;
+	private final HashMap<HospitalMap.Node, Circle> references = new HashMap<>();
+	private final MapManager mapManager;
 
-	public EditorView(MapManager mapManager, ImageView baseImage, int scale, Group root) {
+	public EditorView(MapManager mapManager) {
 		this.mapManager = mapManager;
 		this.root = mapManager.getRoot();
 		this.scale = mapManager.getScale();
-		root.getChildren().add(baseImage);
-		for(HospitalMap.Node node : HospitalMap.nodes) {
-			drawEdges(node);
-			Circle circle = new Circle(node.xcoord / scale, node.ycoord / scale, 13 / scale);
-			circle.setFill(Color.RED);
-			circle.setOnMousePressed(e -> {
-				onRightClick(e, node);
-			});
-			circle.setOnMouseEntered(t -> {
-				Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
-				newCircle.setFill(Color.PINK);
-			});
-
-			circle.setOnMouseExited(t -> {
-				Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
-				newCircle.setFill(Color.RED);
-			});
-			this.references.put(node, circle);
-		}
-		root.getChildren().addAll(references.values());
+		update();
 	}
 
 	public void update() {
-		//
+		root.getChildren().clear();
+		root.getChildren().add(mapManager.getImageView());
+		for(HospitalMap.Node node : HospitalMap.nodes) {
+			drawEdges(node);
+		}
+		root.getChildren().addAll(references.values());
 	}
 
 	private void onRightClick(MouseEvent e, HospitalMap.Node node) {
@@ -70,5 +55,23 @@ public class EditorView {
 						.build();
 				root.getChildren().add(line);
 		}
+	}
+
+	private Circle makeNodeCircle(HospitalMap.Node node) {
+		Circle circle = new Circle();
+		circle.setFill(Color.RED);
+		circle.setOnMousePressed(e -> {
+			onRightClick(e, node);
+		});
+		circle.setOnMouseEntered(t -> {
+			Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
+			newCircle.setFill(Color.PINK);
+		});
+
+		circle.setOnMouseExited(t -> {
+			Circle newCircle = (Circle) root.getChildren().get(root.getChildren().indexOf(circle));
+			newCircle.setFill(Color.RED);
+		});
+		return circle;
 	}
 }

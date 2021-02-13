@@ -12,16 +12,15 @@ import java.io.InputStream;
 
 public class MapManager {
 
-	private String nodePath = null;
-	private String edgePath = null;
-	private String imagePath = null;
-	private MapEditor mapEditor;
+	private final String nodePath;
+	private final String edgePath;
+	private final String imagePath;
+	private final MapEditor mapEditor;
 	private Group root;
 	private ImageView imageView;
-	private int scale = 2; // scales image to 1/scale
-	private HospitalMap hospitalMap;
+	private final int scale = 2; // scales image to 1/scale
 
-	public MapManager(String nodePath, String edgePath, String imagePath) throws FileNotFoundException {
+	public MapManager(String nodePath, String edgePath, String imagePath) {
 		this.nodePath = nodePath;
 		this.edgePath = edgePath;
 		this.imagePath = imagePath;
@@ -29,7 +28,7 @@ public class MapManager {
 	}
 
 	public void init() {
-		hospitalMap = new HospitalMap();
+		HospitalMap hospitalMap = new HospitalMap();
 		hospitalMap.generateElementFromData(ReadCSV.readFromFile(nodePath), ReadCSV.readFromFile(edgePath));
 
 		//creating the image object
@@ -52,7 +51,7 @@ public class MapManager {
 		//Setting the Scene object
 		this.root = new Group();
 		this.imageView = imageView;
-		new EditorView(this, imageView, scale, root);
+		new EditorView(this);
 		Scene scene = new Scene(root,image.getWidth() / scale, image.getHeight() / scale);
 
 		Stage stage = new Stage();

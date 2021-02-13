@@ -33,7 +33,7 @@ public class HospitalMap {
     public static class Node {
         public final String id, building, nodeType, longname, shortname, teamassigned;
         public ArrayList<Node> connectedNodes = new ArrayList<>();
-        public final int xcoord, ycoord, floor;
+        public int xcoord, ycoord, floor;
 
         private Node(List nodeInit) {
             this.id = (String) nodeInit.get(0);

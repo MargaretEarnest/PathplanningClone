@@ -76,7 +76,23 @@ public class EditorView {
 		return circle;
 	}
 
-	public void updateReferencesToCurrNodes(){
-		ArrayList currHospitalMapNodes = MapManager.getHospitalMapNodes();
+	/*
+	Update function that compares a list of HospitalNodes to each Node key in the references HashMap
+	If there is a hash map val that has been added to references, create a new node with a node location and circle for HospitalMap
+	If there is an edited node, set the references location of the node to the Hospital map node
+	If a node has been removed from the HashMap values, delete the node from the Hospital map array
+	currently handles edits
+	 */
+	public void updateReferencesToCurrNodes() {
+		// iterate through a list of hospital map nodes
+		for (HospitalMap.Node refNode : references.keySet()) {
+			for (HospitalMap.Node currNode : mapManager.getHospitalMapNodes()) {
+				if (currNode.id == refNode.id) {
+					// change coords to double?
+					currNode.xcoord = (int) references.get(refNode).getCenterX();
+					currNode.ycoord = (int) references.get(refNode).getCenterY();
+				}
+			}
+		}
 	}
 }

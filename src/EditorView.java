@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class ImageHandler {
+public class EditorView {
 
 	private Group root;
 	private int scale;
 	private ImageView baseImage;
 	private HashMap<HospitalMap.Node, Circle> nodes = new HashMap<>();
 
-	public ImageHandler(ArrayList<HospitalMap.Node> mapNodes, ImageView baseImage, int scale, Group root) {
+	public EditorView(ArrayList<HospitalMap.Node> mapNodes, ImageView baseImage, int scale, Group root) {
 		this.root = root;
 		this.baseImage = baseImage;
 		this.scale = scale;

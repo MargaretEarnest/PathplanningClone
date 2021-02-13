@@ -21,7 +21,7 @@ public class EditorView {
 	public EditorView(MapManager mapManager, ImageView baseImage, int scale, Group root) {
 		this.mapManager = mapManager;
 		this.root = mapManager.getRoot();
-		this.scale = scale;
+		this.scale = mapManager.getScale();
 		root.getChildren().add(baseImage);
 		for(HospitalMap.Node node : HospitalMap.nodes) {
 			drawEdges(node);

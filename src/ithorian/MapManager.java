@@ -16,6 +16,10 @@ public class MapManager {
 	private String edgePath = null;
 	private String imagePath = null;
 	private MapEditor mapEditor;
+	private Group root;
+	private ImageView imageView;
+	private int scale = 2; // scales image to 1/scale
+	private HospitalMap hospitalMap;
 
 	public MapManager(String nodePath, String edgePath, String imagePath) throws FileNotFoundException {
 		this.nodePath = nodePath;
@@ -25,10 +29,7 @@ public class MapManager {
 	}
 
 	public void init() {
-		int scale = 2; // scales image to 1/scale
-
-		HospitalMap hospitalMap = new HospitalMap();
-
+		hospitalMap = new HospitalMap();
 		hospitalMap.generateElementFromData(ReadCSV.readFromFile(nodePath), ReadCSV.readFromFile(edgePath));
 
 		//creating the image object
@@ -49,9 +50,10 @@ public class MapManager {
 		imageView.setFitWidth(image.getWidth() / scale);
 		imageView.setPreserveRatio(true);
 		//Setting the Scene object
-		Group root = new Group();
+		this.root = new Group();
+		this.imageView = imageView;
 		new EditorView(this, imageView, scale, root);
-		Scene scene = new Scene(root, image.getWidth() / scale, image.getHeight() / scale);
+		Scene scene = new Scene(root,image.getWidth() / scale, image.getHeight() / scale);
 
 		Stage stage = new Stage();
 		stage.setTitle("Floor Map");
@@ -61,5 +63,17 @@ public class MapManager {
 
 	public MapEditor getMapEditor() {
 		return mapEditor;
+	}
+
+	public Group getRoot() {
+		return root;
+	}
+
+	public int getScale() {
+		return scale;
+	}
+
+	public ImageView getImageView() {
+		return imageView;
 	}
 }
